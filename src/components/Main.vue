@@ -24,7 +24,7 @@ export default {
     const hasMode = getItem('mode');
     onMounted(() => {
       page.pageCount = (hasCount !== null) ? hasCount*1 : 1;
-      size.pageSize = (hasSize !==null) ? hasSize : options[1];
+      size.pageSize = (hasSize !==null) ? hasSize : 30;
       mode.initMode = (hasMode !==null) ? JSON.parse(hasMode) : false;
     })
     const changeMode = (e) => {
