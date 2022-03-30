@@ -5,7 +5,7 @@
     Select(:size="size.pageSize" @changeSize="changeSize")
   List.pt-20(:pageCount="page.pageCount" :pageSize="size.pageSize" :isCard="mode.initMode")
   template.flex.justify-center.bottom-2.right-50p.left-50p.fixed
-    Pagi(:count="page.pageCount" @changeCount="changeCount")
+    Pagi(:count="page.pageCount" :size="size.pageSize" @changeCount="changeCount")
 </template>
 
 <script>
