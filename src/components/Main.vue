@@ -1,6 +1,6 @@
 <template lang="pug">
 .w-screen.h-screen
-  template.h-16.fixed.w-full.bg-gray-600.flex.items-center.justify-end
+  template.h-16.fixed.w-full.bg-gray-600.flex.items-center.justify-end.z-50
     Switch(:mode="mode.initMode" @changeMode="changeMode")
     Select(:size="size.pageSize" @changeSize="changeSize")
   List.pt-20(:pageCount="page.pageCount" :pageSize="size.pageSize" :isCard="mode.initMode")
