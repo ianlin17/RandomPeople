@@ -1,11 +1,10 @@
 <template lang="pug">
-.w-screen.h-screen
-  template.h-16.fixed.w-full.bg-gray-600.flex.items-center.justify-end.z-50
-    Switch(:mode="mode.initMode" @changeMode="changeMode")
-    Select(:size="size.pageSize" @changeSize="changeSize")
-  List.pt-20(:pageCount="page.pageCount" :pageSize="size.pageSize" :isCard="mode.initMode")
-  template.flex.justify-center.bottom-2.right-50p.left-50p.fixed
-    Pagi(:count="page.pageCount" :size="size.pageSize" @changeCount="changeCount")
+template.h-16.fixed.w-full.bg-gray-600.flex.items-center.justify-end.z-50
+  Switch(:mode="mode.initMode" @changeMode="changeMode")
+  Select(:size="size.pageSize" @changeSize="changeSize")
+List.pt-20(:pageCount="page.pageCount" :pageSize="size.pageSize" :isCard="mode.initMode")
+template.flex.justify-center.bottom-2.right-50p.left-50p.fixed
+  Pagi(:count="page.pageCount" :size="size.pageSize" @changeCount="changeCount")
 </template>
 
 <script>

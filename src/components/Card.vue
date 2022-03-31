@@ -31,7 +31,6 @@ export default ({
     show.mode = props.mode;
     watch(() => props.info,
       (newVal) => {
-        profile.value = newVal;
         info.profile = newVal;
       }
     );

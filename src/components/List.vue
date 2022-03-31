@@ -1,6 +1,6 @@
 <template lang="pug">
 template(v-if="!show.mode")
-  template.sm_grid-cols-1.md_grid-cols-3.lg_grid-cols-5.p-4.grid.gap-2.pb-20
+  template.sm_grid-cols-1.md_grid-cols-3.lg_grid-cols-5.p-4.grid.gap-8.pb-20
     Card(v-for="list of list.result" :info="list" :mode="show.mode")
 template(v-else)
   template.p-4.flex.pb-20.flex-col
