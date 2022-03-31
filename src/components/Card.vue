@@ -1,11 +1,11 @@
 <template lang="pug">
 transition(name="fade" appear)
   div(@click="open()" v-if="!show.mode")
-    el-card.w-32.h-48.text-center.mt-0.mb-0.mx-auto.bg-indigo-200.h-full(shadow="hover")
+    el-card.w-32.h-48.text-center.mt-0.mb-0.mx-auto.bg-indigo-200.h-full.hover_cursor-pointer.hover_scale-110.hover_animate-pulse(shadow="hover")
       img.mt-0.mb-0.mx-auto.mb-3(:src="info.profile.picture.medium")
       span {{info.profile.name.first}}
   div(@click="open()" v-else)
-    el-card.w-full.h-48.text-center.mt-1.mb-1.bg-indigo-200.h-full(shadow="hover")
+    el-card.w-full.h-48.text-center.mt-1.mb-1.bg-indigo-200.h-full.hover_cursor-pointer.hover_scale-110.hover_animate-pulse(shadow="hover")
       img.mt-0.mb-0.mx-auto.mb-3(:src="info.profile.picture.medium")
       span {{info.profile.name.first}}
 template(v-if="centerDialogVisible")
