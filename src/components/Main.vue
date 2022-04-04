@@ -1,47 +1,44 @@
 <template lang="pug">
 template.h-16.fixed.w-full.bg-gray-600.flex.items-center.justify-end.z-50
-  Switch(:mode="mode.initMode" @changeMode="changeMode")
-  Select(:size="size.pageSize" @changeSize="changeSize")
-List.pt-20(:pageCount="page.pageCount" :pageSize="size.pageSize" :isCard="mode.initMode")
+  Switch(:mode="initMode" @changeMode="changeMode")
+  Select(:size="pageSize" @changeSize="changeSize")
+List.pt-20(:pageCount="pageCount" :pageSize="pageSize" :isCard="initMode")
 template.flex.justify-center.bottom-2.right-50p.left-50p.fixed
-  Pagi(:count="page.pageCount" :size="size.pageSize" @changeCount="changeCount")
+  Pagi(:count="pageCount" :size="pageSize" @changeCount="changeCount")
 </template>
 
 <script>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { getItem, setItem } from '../functions/util.js'
 export default {
   setup() {
-    const pageCount = ref(null);
-    const pageSize = ref(null);
-    const initMode = ref(null);
-    const page = reactive({ pageCount });
-    const size = reactive({ pageSize });
-    const mode = reactive({ initMode });
+    let pageCount = ref(0);
+    let pageSize = ref(0);
+    let initMode = ref(false);
     const hasCount = getItem('count');
     const hasSize = getItem('size');
     const hasMode = getItem('mode');
     onMounted(() => {
-      page.pageCount = (hasCount !== null) ? hasCount*1 : 1;
-      size.pageSize = (hasSize !==null) ? hasSize : 30;
-      mode.initMode = (hasMode !==null) ? JSON.parse(hasMode) : false;
+      pageCount.value = (hasCount !== null) ? hasCount*1 : 1;
+      pageSize.value = (hasSize !==null) ? hasSize*1 : 30;
+      initMode.value = (hasMode !==null) ? JSON.parse(hasMode) : false;
     })
     const changeMode = (e) => {
-      mode.initMode = e;
+      initMode.value = e;
       setItem('mode',  e);
     };
     const changeSize = (e) => {
-      size.pageSize = e;
+      pageSize.value = e;
       setItem('size',  e);
     };
     const changeCount = (e) => {
-      page.pageCount = e;
+      pageCount.value = e;
       setItem('count',  e);
     };
     return {
-      page,
-      size,
-      mode,
+      pageCount,
+      pageSize,
+      initMode,
       changeMode,
       changeCount,
       changeSize

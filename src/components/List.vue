@@ -1,10 +1,10 @@
 <template lang="pug">
-template(v-if="!show.mode")
+template(v-if="!isCard")
   template.sm_grid-cols-1.md_grid-cols-3.lg_grid-cols-5.p-4.grid.gap-8.pb-20
-    Card(v-for="list of list.result" :info="list" :mode="show.mode")
+    Card(v-for="list of list.result" :info="list" :mode="isCard")
 template(v-else)
   template.p-4.flex.pb-20.flex-col
-    Card(v-for="list of list.result" :info="list" :mode="show.mode")
+    Card(v-for="list of list.result" :info="list" :mode="isCard")
 </template>
 <script>
 
@@ -16,9 +16,6 @@ export default ({
   setup(props) {
     let result = ref(null);
     let list = reactive({result})
-    const mode = ref(null);
-    const show = reactive({mode});
-    show.mode = props.isCard;
     onMounted( async ()=>{
       watch(
           () => props.pageSize,
@@ -27,10 +24,6 @@ export default ({
       watch(
           () => props.pageCount,
           (newVal) => loading(props.pageSize, newVal)
-      );
-      watch(
-          () => props.isCard,
-          (newVal) => show.mode = newVal
       );
       loading(props.pageSize, props.pageCount);
     });
@@ -41,16 +34,14 @@ export default ({
         fullscreen: true,
         background: 'rgba(0, 0, 0, 0.7)',
       });
-      result = await getList(size, count);
+      const temp = await getList(size, count);
       if(result) {
         showLoading.close();
-        list.result = result;
+        list.result = temp;
       };
     }
     return {
-      result,
       list,
-      show,
       loading
     }
   },

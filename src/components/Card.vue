@@ -1,48 +1,30 @@
 <template lang="pug">
 transition(name="fade" appear)
-  div(@click="open()" v-if="!show.mode")
+  div(@click="open()" v-if="!mode")
     el-card.w-32.h-48.text-center.mt-0.mb-0.mx-auto.bg-indigo-200.h-full.hover_cursor-pointer.hover_scale-110.hover_animate-pulse(shadow="hover")
-      img.mt-0.mb-0.mx-auto.mb-3(:src="info.profile.picture.medium")
-      span {{info.profile.name.first}}
+      img.mt-0.mb-0.mx-auto.mb-3(:src="info.picture.medium")
+      span {{info.name.first}}
   div(@click="open()" v-else)
     el-card.w-full.h-48.text-center.mt-1.mb-1.bg-indigo-200.h-full.hover_cursor-pointer.hover_scale-110.hover_animate-pulse(shadow="hover")
-      img.mt-0.mb-0.mx-auto.mb-3(:src="info.profile.picture.medium")
-      span {{info.profile.name.first}}
+      img.mt-0.mb-0.mx-auto.mb-3(:src="info.picture.medium")
+      span {{info.name.first}}
 template(v-if="centerDialogVisible")
-  el-dialog(v-model="centerDialogVisible" :title="info.profile.name.first + ' '+ info.profile.name.last" width="30%" :show-close="false" center)
-    img.mt-0.mb-0.mx-auto(:src="info.profile.picture.large")
+  el-dialog(v-model="centerDialogVisible" :title="info.name.first + ' '+ info.name.last" width="30%" :show-close="false" center)
+    img.mt-0.mb-0.mx-auto(:src="info.picture.large")
     template#footer
       span.dialog-footer
         el-button(@click="centerDialogVisible=false") Cancel
 </template>
 
 <script>
-import {watch, ref, reactive } from 'vue';
+import {ref } from 'vue';
 export default ({
   props: ['info', 'mode'],
-  setup(props) {
-    const profile = ref('');
+  setup() {
     const centerDialogVisible = ref(false)
-    const info = reactive({profile});
-    const mode = ref(null);
-    const show = reactive({mode});
-    profile.value = props.info;
-    info.profile = props.info;
-    show.mode = props.mode;
-    watch(() => props.info,
-      (newVal) => {
-        info.profile = newVal;
-      }
-    );
-    watch(
-      () => props.mode,
-      (newVal) => show.mode = newVal
-    );
     const open = () => centerDialogVisible.value = true;
     return {
-      info,
       centerDialogVisible,
-      show,
       open
     }
   },
